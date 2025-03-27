@@ -1,5 +1,8 @@
 echo "
 # Ignore unnecessary files
+*.tar.gz
+dependencies/
+
 __pycache__/
 *.log
 *.tmp
@@ -10,7 +13,6 @@ __pycache__/
 .git
 .env
 
-*.tar.gz
 
 *.whl
 
