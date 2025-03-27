@@ -9,3 +9,4 @@ airflow-webserver.pid
 webserver_config.py
 airflow.cfg
 airflow.db
+dependencies/pyspark-3.5.5.tar.gz
