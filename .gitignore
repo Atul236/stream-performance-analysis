@@ -3,6 +3,17 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+__pycache__/
+
+.env
+
+*.tar.gz
+
+*.whl
+
+dependencies/
+
+
 # C extensions
 *.so
 
