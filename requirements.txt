@@ -1,3 +1,10 @@
 # Astro Runtime includes the following pre-installed providers packages: https://www.astronomer.io/docs/astro/runtime-image-architecture#provider-packages
 minio==7.2.14
 # apache-airflow-providers-docker==4.0.0
+
+# pyspark==3.5.5
+python-dateutil==2.9.0.post0
+six==1.17.0
+boto3==1.37.18
+s3transfer==0.11.4
+# pip install -r requirements.txt
