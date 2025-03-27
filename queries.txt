@@ -1,0 +1,107 @@
+Discrepancies Documented
+Movie Details Data:
+Column	Discrepancy Type	Example
+genre	Missing values	"Avengers Endgame"
+region	Missing values	"Avengers Endgame"
+release_date	Missing values	"Frozen II"
+lead_actor	Missing values	"Top Gun: Maverick"
+producer	Missing values	"Avengers Endgame"
+comments	Special characters	"Amazing$$", "#MustWatch"
+Streaming Performance Data:
+Column	Discrepancy Type	Example
+streaming_revenue_usd	Improper data format	"Two Hundred Thousand"
+watch_hours	Missing values	"Avatar 2"
+monthly_views	Missing values	"Frozen II"
+feedback	Special characters	"Awesome!!", "Classic"
+streaming_date	Improper date format	"20-12-2025", "16/07/2010"
+
+
+
+Sure! Here's a comprehensive workflow to guide you through the process of data cleaning, transformation, and dimensional modeling. This structure will help you ensure your project stays organized and structured as you progress.
+Workflow for Your Project
+1. Data Cleaning
+This phase ensures the raw data is consistent, complete, and usable for further analysis.
+•	Check for Missing Values:
+o	Identify columns with missing values.
+o	Decide how to handle them (e.g., fill with defaults, mean, mode, or drop rows/columns).
+•	Remove Duplicates:
+o	Identify and remove duplicate rows that may skew analysis.
+•	Fix Improper Data Formats:
+o	Normalize date formats (e.g., convert all to YYYY-MM-DD).
+o	Ensure numerical columns (e.g., revenue) have consistent data types.
+o	Standardize categorical data (e.g., title-casing platform names or genres).
+•	Remove Special Characters:
+o	Clean text columns (e.g., remove characters like #, $, or emojis from comments/feedback).
+2. Data Transformation
+This phase involves restructuring the cleaned data to derive meaningful insights and prepare it for modeling.
+•	Standardize Column Names:
+o	Ensure consistent naming conventions (e.g., lowercase, underscores instead of spaces).
+•	Create New Columns:
+o	Derive useful metrics like:
+	Price range (High - Low for stock-like data).
+	Total revenue (Box Office Revenue + Streaming Revenue for movie data).
+	Aggregated metrics (e.g., monthly averages or sums).
+•	Filter Data:
+o	Remove irrelevant rows or columns that don’t contribute to your analysis.
+•	Join Datasets:
+o	Combine datasets on common keys (e.g., movie_id).
+o	Use appropriate join types (inner, outer, etc.) based on your use case.
+•	Group and Aggregate:
+o	Aggregate data for specific dimensions (e.g., revenue by genre, views by platform).
+•	Normalize and Categorize:
+o	Transform data for consistent categorization (e.g., assign ranges to numerical values like small, medium, large for market size).
+3. Dimensional Modeling
+This phase structures your data into a star schema for analytics and querying.
+•	Identify Fact Table:
+o	The central table contains measurable metrics (e.g., revenue, watch hours, views).
+o	Example columns:
+	movie_id, streaming_revenue_usd, watch_hours, monthly_views.
+•	Design Dimension Tables:
+o	Dimensions provide additional context for the fact table.
+o	Examples:
+1.	Actor Dimension:
+	lead_actor, movie_id.
+2.	Platform Dimension:
+	platform, total_streaming_revenue, total_watch_hours.
+3.	Genre Dimension:
+	genre, total_views, total_watch_hours.
+4.	Region Dimension:
+	region, total_movies, average_views.
+5.	Producer Dimension:
+	producer, movie_id, total_revenue.
+
+Query for analysis :
+1. total streaming revenue by plateform
+
+SELECT platform, SUM(streaming_revenue_usd) AS total_revenue
+FROM fact_table
+GROUP BY platform
+ORDER BY total_revenue DESC;
+
+2. Top Genres by Watch Hours
+SELECT genre, SUM(watch_hours) AS total_watch_hours
+FROM dim_genre
+GROUP BY genre
+ORDER BY total_watch_hours DESC;
+3. movie count by region 
+SELECT region, COUNT(*) AS total_movies
+FROM dim_region
+GROUP BY region
+ORDER BY total_movies DESC;
+
+4. producer wise revenue
+SELECT producer, SUM(streaming_revenue_usd) AS total_revenue
+FROM dim_producer
+GROUP BY producer
+ORDER BY total_revenue DESC;
+
+
+
+
+5. Lead  actorwise watch hours 
+
+SELECT a.lead_actor, AVG(f.watch_hours) AS avg_watch_hours
+FROM fact_table AS f
+JOIN dim_actor AS a ON f.movie_id = a.movie_id
+GROUP BY a.lead_actor
+ORDER BY avg_watch_hours DESC;
