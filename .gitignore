@@ -1,3 +1,4 @@
+
 .git
 .env
 .DS_Store
@@ -9,4 +10,19 @@ airflow-webserver.pid
 webserver_config.py
 airflow.cfg
 airflow.db
+dependencies/pyspark-3.5.5.tar.gz
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+__pycache__/
+
+.env
+
+*.tar.gz
+
+*.whl
+
+
 dependencies/pyspark-3.5.5.tar.gz
