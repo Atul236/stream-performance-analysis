@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 Overview
 
@@ -35,8 +35,5 @@ Note: Running 'astro dev start' will start your project with the Airflow Webserv
 You should also be able to access your Postgres Database at 'localhost:5432/postgres'.
 
 
-# stream_performance_analysis_airflow
 
-=======
-# stream_performance_analysis
->>>>>>> fc0c5905f31e501755f3895d2dbad121e9125d30
+
